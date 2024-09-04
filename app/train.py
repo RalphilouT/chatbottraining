@@ -1,12 +1,12 @@
 import json
-from nltk_utils import tokenize, stem, bag_of_words
+from app.nltk_utils import tokenize, stem, bag_of_words
 import numpy as np
 
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
-from model import Net
+from app.model import Net
 
 with open('intents.json','r') as f:
     intents = json.load(f)

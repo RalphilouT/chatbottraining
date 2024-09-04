@@ -6,10 +6,10 @@ from nltk_utils import bag_of_words, tokenize
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-with open('intents.json', 'r') as f: 
+with open('app/intents.json', 'r') as f: 
     intents = json.load(f)
 
-FILE = "data.pth"
+FILE = "app/data.pth"
 data = torch.load(FILE)
 
 input_size = data["input_size"]
