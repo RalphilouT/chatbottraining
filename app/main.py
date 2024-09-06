@@ -22,15 +22,19 @@
 #     app.run(debug=True)
 
 from flask import Flask, render_template, request, jsonify
+
 from flask_cors import CORS, cross_origin
 from chat import get_response
-
+from vardata import *
+from security import login_required
 # Frontend not tied with flask 
 app = Flask(__name__)
 CORS(app)
 
+
 @app.post("/predict")
-@cross_origin(origins="*") 
+@cross_origin(origins="*")
+@login_required
 def predict():
     text = request.get_json().get("message")
     # TODO: check if text is valid
