@@ -8,7 +8,7 @@ import datetime
 from functools import wraps
 from flask_cors import CORS, cross_origin
 from chat import get_response
-from vardata import *
+# from vardata import *
 from security import login_required
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Date, Integer, String
@@ -87,6 +87,7 @@ def predict():
     return jsonify(message)
 
 @app.route('/register', methods=['GET', 'POST'])
+@cross_origin(origins="*")
 def signup_user():  
     data = request.get_json()  
     user = Users.query.filter_by(name=data['name']).first()
@@ -102,6 +103,7 @@ def signup_user():
     return jsonify({'message': 'registered successfully'})
 
 @app.route('/login', methods=['GET', 'POST'])  
+@cross_origin(origins="*")
 def login_user(): 
     auth = request.authorization   
 
@@ -120,6 +122,7 @@ def login_user():
     return make_response('Could not verify',  401, {'WWW Authentication': 'Basic realm: "Login required"'})
 
 @app.route('/user', methods=['GET'])
+@cross_origin(origins="*")
 def get_all_users():  
    
    users = Users.query.all() 
