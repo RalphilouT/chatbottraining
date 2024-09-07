@@ -8,8 +8,8 @@ import datetime
 from functools import wraps
 from flask_cors import CORS, cross_origin
 from chat import get_response
+# from security import login_required
 # from vardata import *
-from security import login_required
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Date, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
