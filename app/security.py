@@ -1,3 +1,4 @@
+# Old basic auth without database
 # from functools import wraps
 # # from vardata import *
 # from flask import request
