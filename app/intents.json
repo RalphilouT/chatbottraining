@@ -39,15 +39,16 @@
         "What is your education backfround?"
       ],
       "responses": [
-        "I attended Santa Monica College and UC Merced for my undergrad."
+        "I attended Santa Monica College and UC Merced for my undergrad. I had a 3.2 GPA in SMC and a 3.8 in UCMerced. For more information, you can head to the about page on my website: ralphiloutatoy.com."
       ]
     },
     {
       "tag": "projects",
       "patterns": [
-        "What type of projects?",
-        "Do you have experience?",
-        "Can I see your projects?"
+        "What type of projects are you working on?",
+        "What type of projects have you done?",
+        "Do you have experience do you have in this industry?",
+        "Can I see your project descriptions?"
       ],
       "responses": [
         "My projects are on https://github.com/RalphilouT and https://ralphilouresume.web.app/Project.",
@@ -86,6 +87,18 @@
       ],
       "responses": [
           "I have knowledge on many techstack such as Java, Javascript, C/C++, Jira, Node.js, Matlab, Python, HTML5, PHP, SQLite, SQL, CSS, Bootstrap, C#, React.js, Spring, ASP.net, AWS< Selenium, Rest Assured, Jenkins."
+      ]
+    }
+    ,
+    {
+      "tag": "contact",
+      "patterns": [
+        "Where can I contact you?",
+        "What are your socials?",
+        "Can I have your phone number or email to contact you?"
+      ],
+      "responses": [
+          "My contacts are in https://ralphiloutatoy.com/Contact page. You can send me an email in that page. My email is ralphilou24@gmail.com"
       ]
     }
   ]
