@@ -80,11 +80,10 @@ def token_required(f):
 @token_required
 def predict():
     text = request.get_json().get("message")
-    # TODO: check if text is valid
-
-    resp = get_response(text)
-    message = {"answer": resp}
-    return jsonify(message)
+    if(text):
+        resp = get_response(text)
+        message = {"answer": resp}
+        return jsonify(message)
 
 @app.route('/register', methods=['GET', 'POST'])
 @cross_origin(origins="*")
