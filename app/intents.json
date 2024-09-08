@@ -34,6 +34,7 @@
     {
       "tag": "school",
       "patterns": [
+        "school","university","education",
         "What school did you attend?",
         "What university did you go?",
         "What is your education backfround?"
@@ -45,6 +46,7 @@
     {
       "tag": "projects",
       "patterns": [
+        "project","work","application",
         "What type of projects are you working on?",
         "What type of projects have you done?",
         "Do you have experience do you have in this industry?",
@@ -58,6 +60,7 @@
     {
       "tag": "career",
       "patterns": [
+        "job","career","Do you have a job position?",
         "Are you currently looking for a job?",
         "Are you employed?",
         "Do have a job?"
@@ -81,6 +84,7 @@
     {
       "tag": "skills",
       "patterns": [
+        "skills", "techstack",
         "What skills do you possess?",
         "What techstack are you comfortable with?",
         "What languages do you know?"
@@ -93,6 +97,7 @@
     {
       "tag": "contact",
       "patterns": [
+        "email", "e-mail","phone","contact",
         "Where can I contact you?",
         "What are your socials?",
         "Can I have your phone number or email to contact you?"
