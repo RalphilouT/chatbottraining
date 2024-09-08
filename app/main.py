@@ -83,7 +83,8 @@ def predict():
     if(text):
         resp = get_response(text)
         message = {"answer": resp}
-        return jsonify(message)
+        return make_response(message, 200)
+    return make_response('No user input' , 422, {'WWW-Authenticate': 'Basic-realm= "InvalidArgumentException!"'}) 
 
 @app.route('/register', methods=['GET', 'POST'])
 @cross_origin(origins="*")
@@ -91,7 +92,7 @@ def signup_user():
     data = request.get_json()  
     user = Users.query.filter_by(name=data['name']).first()
     if user:
-        return make_response('Username is taken' , 401, {'WWW-Authenticate': 'Basic-realm= "Username taken!"'}) 
+        return make_response('Username is taken' , 422, {'WWW-Authenticate': 'Basic-realm= "Username taken!"'}) 
     
     hashed_password = generate_password_hash(data['password'], method='pbkdf2:sha256')
     
@@ -107,7 +108,7 @@ def login_user():
     auth = request.authorization   
 
     if not auth or not auth.username or not auth.password:  
-        return make_response('could not verify', 401, {'WWW.Authentication': 'Basic realm: "login required"'})    
+        return make_response('Could not verify', 401, {'WWW.Authentication': 'Basic realm: "login required"'})    
 
     user = Users.query.filter_by(name=auth.username).first() 
     if not user:
