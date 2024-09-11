@@ -3,16 +3,21 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid 
 import jwt
-# from datetime import datetime, timedelta
+from datetime import datetime, timedelta
 import datetime
 from functools import wraps
 from flask_cors import CORS, cross_origin
 from chat import get_response
 # from security import login_required
-# from vardata import *
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Date, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
+from dotenv import load_dotenv
+import os
+ 
+
+from config import config
+
 # Frontend not tied with flask 
 engine = create_engine("sqlite:///app/api.db", echo=True)
 Base = declarative_base()
@@ -30,18 +35,17 @@ Base.metadata.create_all(engine)
 
 app = Flask(__name__)
 CORS(app)
-import os
+
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 DATABASE = os.path.join(PROJECT_ROOT, 'tmp', 'api.db')
 
-app.config['SECRET_KEY']='F`_E1U]?02yqm-4@[DJ5GFmp1MigcrLCO?a81{R3\FCiv<Xb2'
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////api.db"
-import os
+app.config.from_object(config.get('default'))
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///"+os.path.join(basedir, "api.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True 
+app.config['SECRET_KEY']=app.config['SECRETS_ENV']
 
 db = SQLAlchemy()
 db.init_app(app)
@@ -51,6 +55,7 @@ class Users(db.Model):
     public_id = db.Column(db.Integer)  
     name = db.Column(db.String())
     password = db.Column(db.String())
+
 
 
 # Authentication decorator
@@ -100,7 +105,8 @@ def signup_user():
     db.session.add(new_user)  
     db.session.commit()    
 
-    return jsonify({'message': 'registered successfully'})
+    return make_response(jsonify({'message': 'registered successfully'}), 201)
+
 
 @app.route('/login', methods=['GET', 'POST'])  
 @cross_origin(origins="*")
@@ -124,24 +130,31 @@ def login_user():
 @app.route('/user', methods=['GET'])
 @cross_origin(origins="*")
 def get_all_users():  
-   
-   users = Users.query.all() 
+  
+  
+    users = Users.query.all() 
 
-   result = []   
+    result = []   
 
-   for user in users:   
-       user_data = {}   
-       user_data['public_id'] = user.public_id  
-       user_data['name'] = user.name 
-       user_data['password'] = user.password
-       
-       result.append(user_data)   
+    for user in users:   
+        user_data = {}   
+        user_data['public_id'] = user.public_id  
+        user_data['name'] = user.name 
+        user_data['password'] = user.password
+        
+        result.append(user_data)   
 
-   return jsonify({'users': result})  
+    return jsonify({'users': result})  
 
 
 if __name__ == "__main__":
+    # hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+    # new_user = Users(public_id=str(uuid.uuid4()), name=username, password=hashed_password) 
+    # db.session.add(new_user)  
+    # db.session.commit() 
     app.run(host="0.0.0.0", port=5000)
+    
+    
 
 
 
